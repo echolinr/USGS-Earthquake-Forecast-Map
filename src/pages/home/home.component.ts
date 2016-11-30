@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AppState } from '../../services/app.service';
+import { AftershockService } from '../../services/aftershock.services';
 import { Title } from './title';
 import { XLarge } from './x-large';
 
@@ -18,9 +19,18 @@ import { XLarge } from './x-large';
 export class HomeComponent {
   // Set our default values
   localState = { value: '' };
+  aftershocks: any[];
   // TypeScript public modifiers
-  constructor(public appState: AppState, public title: Title) {
-
+  constructor(public appState: AppState, public title: Title, public aftershockService: AftershockService) {
+    this.aftershockService.getLastAftershocks().subscribe(aftershocks => {
+      if(aftershocks){
+        this.aftershocks = aftershocks;
+      }else{
+        console.log('No Data');
+      }
+    }, error => {      
+        console.log(error);
+    });
   }
 
   ngOnInit() {

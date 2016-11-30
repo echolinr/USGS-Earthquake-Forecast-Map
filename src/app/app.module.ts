@@ -13,8 +13,10 @@ import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
 // App is our top level component
 import { USGSApp } from './app.component';
+import { Configuration } from './app.constants';
 import { APP_RESOLVER_PROVIDERS } from '../services/app.resolver';
 import { AppState, InternalStateType } from '../services/app.service';
+import { AftershockService } from '../services/aftershock.services';
 
 import { HomeComponent } from '../pages/home';
 import { AboutComponent } from '../pages/about';
@@ -24,7 +26,9 @@ import { XLarge } from '../pages/home/x-large';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  Configuration,
+  AftershockService
 ];
 
 type StoreType = {

@@ -13,6 +13,30 @@
   </div>
 
   <hr>
+  <table>
+    <thead>
+    <tr>
+        <th style="width: 20%">Process Time</th>
+        <th style="width: 50%">Event Id</th>
+        <th style="width: 10%">Magnitude</th>
+        <th style="width: 20%">Event Time</th>        
+        <th style="width: 20%">#Aftershocks</th>        
+        <th style="width: 20%">Location</th>        
+        <th style="width: 20%">Is Active</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let aftershock of aftershocks">
+        <td>{{aftershock.sampleTime | date:'longDate'}}</td>
+        <td>{{aftershock.mainShockId}}</td>
+        <td>{{aftershock.magnitude}}</td>
+        <td>{{aftershock.mainShockTime}}</td>
+        <td>{{aftershock.afterShocks}}</td>
+        <td>{{aftershock.location}}</td>
+        <td>{{aftershock.isActive}}</td>
+    </tr>
+    </tbody>
+</table>
 
   <div>
     <h4>Local State</h4>
