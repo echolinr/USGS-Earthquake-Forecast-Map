@@ -5,12 +5,8 @@ npm install
 # start the server
 npm start
 
-# use Hot Module Replacement
-npm run server:dev:hmr
 
-
-```
-go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http://localhost:3000) in your browser
+go to [http://0.0.0.0:4000](http://0.0.0.0:4000) or [http://localhost:4000](http://localhost:4000) in your browser
 
 # Getting Started
 ## Dependencies
@@ -30,7 +26,7 @@ Once you have those, you should install these globals with `npm install --global
 * `npm run server` to start the dev server in another tab
 
 ## Running the app
-After you have installed all dependencies you can now run the app. Run `npm run server` to start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:3000/`).
+After you have installed all dependencies you can now run the app. Run `npm run server` to start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:4000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:4000/`).
 
 ### server
 ```bash
@@ -49,11 +45,6 @@ npm run server:prod
 npm run build:dev
 # production
 npm run build:prod
-```
-
-### hot module replacement
-```bash
-npm run server:dev:hmr
 ```
 
 ### watch and build files
