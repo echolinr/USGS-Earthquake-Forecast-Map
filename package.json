@@ -139,13 +139,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
+    "url": "https://clarkajf@bitbucket.org/usgs-cmu-sv/website.git"
   },
   "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
+    "url": "git remote add origin https://clarkajf@bitbucket.org/usgs-cmu-sv/website.git"
   },
   "engines": {
-    "node": ">= 4.2.1",
-    "npm": ">= 3"
+    "node": ">= 7.2",
+    "npm": ">= 4"
   }
 }
