@@ -4,8 +4,9 @@
         <h2>Event Data</h2>
         <md-input formControlName="eventId" placeholder="Event ID"></md-input>
         <md-slide-toggle formControlName="emulate" color="primary">Emulate</md-slide-toggle>
+        <md-input formControlName="minDays" placeholder="Min Days" type="number"></md-input>
         <md-input formControlName="maxDays" placeholder="Max Days" type="number"></md-input>
-        <hr>        
+        <md-slide-toggle color="primary">Is Persistent</md-slide-toggle>
         <h2>Region</h2>
         <ng2-select name='regionType' [placeholder]="'Region Type'"
             [displayBy]="'name'"
@@ -14,19 +15,31 @@
             [options]="regionTypeOptions"
             formControlName="regionType">
         </ng2-select>
-        <ng2-select name='centerType' [placeholder]="'Center Type'"
+        <ng2-select *ngIf="eventForm.get('regionType').value.name == 'Circular' || eventForm.get('regionType').value.name == 'WC Circular 1994'" name='centerType' [placeholder]="'Center Type'"
             [displayBy]="'name'"
             [selectedDisplayBy]="'label'"
             [identifyBy]="'name'"
             [options]="centerTypeOptions"
             formControlName="centerType">
         </ng2-select>
-        <!--public double radius;
-        public Location circleCenter;
-        public Location minLoc;
-        public Location maxLoc;-->
-        <md-slide-toggle color="primary">Is Persistent</md-slide-toggle>
-        <button md-raised-button color="primary">PRIMARY</button>
+        <md-input formControlName="minDepth" placeholder="Min Depth" type="number"></md-input>
+        <md-input formControlName="maxDepth" placeholder="Max Depth" type="number"></md-input><br/>
+        <md-input *ngIf="eventForm.get('regionType').value.name == 'Circular'" formControlName="radius" placeholder="Radius" type="number"></md-input><br/>
+        <md-input *ngIf="eventForm.get('centerType').value.name == 'Custom Location'"formControlName="centerLat" placeholder="Center Latitude" type="number"></md-input>
+        <md-input *ngIf="eventForm.get('centerType').value.name == 'Custom Location'"formControlName="centerLong" placeholder="Center Longitude" type="number"></md-input>
+        <md-input *ngIf="eventForm.get('centerType').value.name == 'Custom Location'"formControlName="centerDepth" placeholder="Center Depth" type="number"></md-input><br/>
+        <md-input *ngIf="eventForm.get('regionType').value.name == 'Rectangular'" formControlName="minLat" placeholder="Min Latitude" type="number"></md-input>
+        <md-input *ngIf="eventForm.get('regionType').value.name == 'Rectangular'" formControlName="maxLat" placeholder="Max Latitude" type="number"></md-input><br/>
+        <md-input *ngIf="eventForm.get('regionType').value.name == 'Rectangular'" formControlName="minLong" placeholder="Min Longitude" type="number"></md-input>
+        <md-input *ngIf="eventForm.get('regionType').value.name == 'Rectangular'" formControlName="maxLong" placeholder="Max Longitude" type="number"></md-input>
+        <h2>RJ Parameters</h2>
+        <md-input formControlName="minA" placeholder="Min a Value" type="number"></md-input>
+        <md-input formControlName="maxA" placeholder="Max a Value" type="number"></md-input><br/>
+        <md-input formControlName="minP" placeholder="Min p Value" type="number"></md-input>
+        <md-input formControlName="maxP" placeholder="Max p Value" type="number"></md-input><br/>
+        <md-input formControlName="minC" placeholder="Min c Value" type="number"></md-input>
+        <md-input formControlName="maxC" placeholder="Max c Value" type="number"></md-input><br/>
+        <button md-raised-button color="primary" (click)="submit()">Send Event</button>
     </form>
   </md-card-content>
 </md-card>
