@@ -79,12 +79,9 @@ export class AddEventPage {
       responseObject = this.eventForm.value;
       responseObject.regionType = responseObject.regionType.name;
       responseObject.centerType = responseObject.centerType.name;
-      responseObject.minLocation = { };
-      responseObject.maxLocation = {};
-      responseObject.centerLocation = {};
-      if(responseObject.regionType == 'WC Circular 1994'){
-
-      }
+      responseObject.minLocation = { lat: responseObject.minLat, lon: responseObject.minLong, depth: responseObject.minDepth };
+      responseObject.maxLocation = { lat: responseObject.maxLat, lon: responseObject.maxLong, depth: responseObject.maxDepth };
+      responseObject.circleCenter = { lat: responseObject.centerLat, lon: responseObject.centerLong, depth: responseObject.centerDepth };
     }else{
       console.log('Invalid Data');
     }
