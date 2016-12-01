@@ -49,6 +49,7 @@ export class AddEventPage {
     this.eventForm = formBuilder.group({
       eventId: ['', Validators.compose([Validators.required])],
       emulate: ['', Validators.compose([Validators.required])],
+      persistent: ['', Validators.compose([Validators.required])],
       minDays: ['0', Validators.compose([Validators.required])],
       maxDays: ['0', Validators.compose([Validators.required])],
       regionType: ['WC Circular 1994', Validators.compose([Validators.required])],
