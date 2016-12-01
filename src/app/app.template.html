@@ -12,13 +12,11 @@
 <md-sidenav-layout>
   <md-sidenav #nav [opened]="true" mode="side">
     <md-list>
-      <md-list-item [routerLink]=" ['./']"> Index </md-list-item>
       <md-list-item [routerLink]=" ['./home']"> Home </md-list-item>
-      <md-list-item [routerLink]=" ['./about']"> About </md-list-item>
+      <md-list-item [routerLink]=" ['./add-event']"> Add Event </md-list-item>
     </md-list>
   </md-sidenav>
   <main>
       <router-outlet></router-outlet>
   </main>
-  <button md-raised-button color="primary">PRIMARY</button>
 </md-sidenav-layout>

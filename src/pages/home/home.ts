@@ -4,10 +4,10 @@ import { AftershockService } from '../../services/aftershock.services';
 
 @Component({
   selector: 'home', 
-  styleUrls: ['./home.component.scss'],
-  templateUrl: './home.component.html'
+  styleUrls: ['./home.scss'],
+  templateUrl: './home.html'
 })
-export class HomeComponent {
+export class HomePage {
   aftershocks: any[];
 
   constructor(public aftershockService: AftershockService) {

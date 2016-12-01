@@ -1,0 +1,32 @@
+<md-card>
+  <md-card-content>
+    <form [formGroup]="eventForm">
+        <h2>Event Data</h2>
+        <md-input formControlName="eventId" placeholder="Event ID"></md-input>
+        <md-slide-toggle formControlName="emulate" color="primary">Emulate</md-slide-toggle>
+        <md-input formControlName="maxDays" placeholder="Max Days" type="number"></md-input>
+        <hr>        
+        <h2>Region</h2>
+        <ng2-select name='regionType' [placeholder]="'Region Type'"
+            [displayBy]="'name'"
+            [selectedDisplayBy]="'label'"
+            [identifyBy]="'name'"
+            [options]="regionTypeOptions"
+            formControlName="regionType">
+        </ng2-select>
+        <ng2-select name='centerType' [placeholder]="'Center Type'"
+            [displayBy]="'name'"
+            [selectedDisplayBy]="'label'"
+            [identifyBy]="'name'"
+            [options]="centerTypeOptions"
+            formControlName="centerType">
+        </ng2-select>
+        <!--public double radius;
+        public Location circleCenter;
+        public Location minLoc;
+        public Location maxLoc;-->
+        <md-slide-toggle color="primary">Is Persistent</md-slide-toggle>
+        <button md-raised-button color="primary">PRIMARY</button>
+    </form>
+  </md-card-content>
+</md-card>
