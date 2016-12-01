@@ -14,6 +14,7 @@ import { ROUTES } from './app.routes';
 import { USGSApp } from './app.component';
 import { Configuration } from './app.constants';
 import { AftershockService } from '../services/aftershock.services';
+import { ActiveMQService } from '../services/activemq.services';
 
 import { HomePage } from '../pages/home/home';
 import { AddEventPage } from '../pages/addEvent/addEvent';
@@ -21,7 +22,8 @@ import { NoContentPage } from '../pages/noContent/noContent';
 
 const APP_PROVIDERS = [
   Configuration,
-  AftershockService
+  AftershockService,
+  ActiveMQService
 ];
 
 @NgModule({
