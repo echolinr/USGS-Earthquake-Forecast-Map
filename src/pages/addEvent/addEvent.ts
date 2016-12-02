@@ -52,8 +52,8 @@ export class AddEventPage {
       eventId: ['', Validators.compose([Validators.required])],
       emulate: [false, Validators.compose([Validators.required])],
       persistent: [false, Validators.compose([Validators.required])],
-      minDays: [0, Validators.compose([Validators.required])],
-      maxDays: [0, Validators.compose([Validators.required])],
+      dataMinDays: [0, Validators.compose([Validators.required])],
+      dataMaxDays: [7, Validators.compose([Validators.required])],
       regionType: [{name: 'WC Circular 1994',label: 'WC Circular 1994',id: 0}, Validators.compose([Validators.required])],
       centerType: [{name: 'Epicenter',label: 'Epicenter',id: 2}, Validators.compose([Validators.required])],
       minDepth: [0, Validators.compose([Validators.required])],
@@ -84,6 +84,9 @@ export class AddEventPage {
       responseObject.minLocation = { lat: responseObject.minLat, lon: responseObject.minLong, depth: responseObject.minDepth };
       responseObject.maxLocation = { lat: responseObject.maxLat, lon: responseObject.maxLong, depth: responseObject.maxDepth };
       responseObject.circleCenter = { lat: responseObject.centerLat, lon: responseObject.centerLong, depth: responseObject.centerDepth };
+      if(responseObject.emulate){
+        responseObject.dataMaxDays = 0.167; //4 hours in days
+      }
       console.log(responseObject);
       this.activemqService.addEvent(responseObject).subscribe(response => {
         if(response){
