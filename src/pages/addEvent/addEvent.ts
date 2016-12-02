@@ -57,7 +57,7 @@ export class AddEventPage {
       regionType: [{name: 'WC Circular 1994',label: 'WC Circular 1994',id: 0}, Validators.compose([Validators.required])],
       centerType: [{name: 'Epicenter',label: 'Epicenter',id: 2}, Validators.compose([Validators.required])],
       minDepth: [0, Validators.compose([Validators.required])],
-      maxDepth: [1000, Validators.compose([Validators.required])],
+      maxDepth: [700, Validators.compose([Validators.required])],
       radius: [20],
       centerLat: [0],
       centerLong: [0],
@@ -84,6 +84,17 @@ export class AddEventPage {
       responseObject.minLocation = { lat: responseObject.minLat, lon: responseObject.minLong, depth: responseObject.minDepth };
       responseObject.maxLocation = { lat: responseObject.maxLat, lon: responseObject.maxLong, depth: responseObject.maxDepth };
       responseObject.circleCenter = { lat: responseObject.centerLat, lon: responseObject.centerLong, depth: responseObject.centerDepth };
+
+      delete responseObject.minDepth;
+      delete responseObject.maxDepth;
+      delete responseObject.centerLat;
+      delete responseObject.centerLong;
+      delete responseObject.centerDepth;
+      delete responseObject.minLat;
+      delete responseObject.maxLat;
+      delete responseObject.minLong;
+      delete responseObject.maxLong;
+
       if(responseObject.emulate){
         responseObject.dataMaxDays = 0.167; //4 hours in days
       }
