@@ -27,7 +27,7 @@
           <td data-th="Event Time">{{aftershock.mainShockTime | date:'short'}}</td>
           <td data-th="# Aftershocks">{{aftershock.afterShocks}}</td>
           <td data-th="# Results"><a [routerLink]=" ['/event-results', aftershock.mainShockId]">{{aftershock.modelResults}}</a></td>
-          <td data-th="Location"><a target="_blank" href="https://www.google.com/maps/@{{aftershock.location.lat}},{{aftershock.location.lon}}">See map (Depth: {{aftershock.location.depth}})</a></td>
+          <td data-th="Location"><a target="_blank" href="https://maps.google.com?q={{aftershock.location.lat*180/3.141592653589793}},{{aftershock.location.lon*180/3.141592653589793}}">See map (Depth: {{aftershock.location.depth}})</a></td>
           <td data-th="Is Active">{{aftershock.isActive}}</td>
         </tr>
       </tbody>
