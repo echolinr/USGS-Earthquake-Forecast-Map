@@ -16,10 +16,13 @@ import { ROUTES } from './app.routes';
 import { USGSApp } from './app.component';
 import { Configuration } from './app.constants';
 import { AftershockService } from '../services/aftershock.services';
+import { ResultService } from '../services/result.services';
 import { ActiveMQService } from '../services/activemq.services';
 
 import { HomePage } from '../pages/home/home';
 import { AddEventPage } from '../pages/addEvent/addEvent';
+import { EventResultsPage } from '../pages/eventResults/eventResults';
+import { ResultDetailsPage } from '../pages/resultDetails/resultDetails';
 import { NoContentPage } from '../pages/noContent/noContent';
 
 /*function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
@@ -32,6 +35,7 @@ import { NoContentPage } from '../pages/noContent/noContent';
 const APP_PROVIDERS = [
   Configuration,
   AftershockService,
+  ResultService,
   ActiveMQService
 ];
 
@@ -41,6 +45,8 @@ const APP_PROVIDERS = [
     USGSApp,
     HomePage,
     AddEventPage,
+    EventResultsPage,
+    ResultDetailsPage,
     NoContentPage,
   ],
   imports: [

@@ -19,7 +19,7 @@
           <td data-th="Magnitude">{{aftershock.magnitude}}</td>
           <td data-th="Event Time">{{aftershock.mainShockTime | date:'short'}}</td>
           <td data-th="# Aftershocks">{{aftershock.afterShocks}}</td>
-          <td data-th="# Results">{{aftershock.modelResults}}</td>
+          <td data-th="# Results" [routerLink]=" ['/event-results', aftershock.mainShockId]">{{aftershock.modelResults}}</td>
           <td data-th="Location">{{aftershock.location}}</td>
           <td data-th="Is Active">{{aftershock.isActive}}</td>
       </tr>

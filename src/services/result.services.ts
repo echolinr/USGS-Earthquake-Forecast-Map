@@ -7,21 +7,21 @@ import 'rxjs/add/operator/catch';
 
 
 @Injectable()
-export class AftershockService {    
-    private brandUrl: string = 'aftershocks'; 
+export class ResultService {    
+    private brandUrl: string = 'results'; 
 
     constructor(private http: Http, private config: Configuration) { 
         this.brandUrl = config.ServerWithApiUrl + this.brandUrl;
     }
 
-    getLastAftershocks(): Observable<any[]> {
-        return this.http.get(this.brandUrl + '/lasts')
+    getLastResults(id): Observable<any[]> {
+        return this.http.get(this.brandUrl + '/' + id + '/lasts')
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
 
-    getLastResults(id): Observable<any[]> {
-        return this.http.get(this.brandUrl + '/results/' + id + '/lasts')
+    getLastForecast(id): Observable<any[]> {
+        return this.http.get(this.brandUrl + '/' + id + '/forecasts/last')
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
