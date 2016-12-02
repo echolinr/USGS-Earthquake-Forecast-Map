@@ -17,6 +17,7 @@ export class ActiveMQService {
     addEvent(body: Object): Observable<any> {
         let bodyString = JSON.stringify(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers.append('Authorization', 'Basic ' +btoa('admin:admin'));
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.activeMQUrl + '?destination=queue://Comcat&oneShot=true', bodyString, options)
