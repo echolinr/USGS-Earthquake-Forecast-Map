@@ -1,22 +1,29 @@
-<div class="card-container">
-  <table class="rwd-table">
-    <thead>
-      <tr>
+<md-card>
+  <md-card-content>
+    <md-card-title>
+      Last RJ Results For
+    </md-card-title>
+    <table class="rwd-table">
+      <thead>
+        <tr>
           <th>Process Time</th>
           <th>a Value</th>
           <th>c Value</th>
-          <th>p Value</th>        
-          <th>Regime</th>    
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let result of results">
+          <th>p Value</th>
+          <th>Regime</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of results">
           <td data-th="Process Time">{{result.sampleTime | date:'short'}}</td>
           <td data-th="a Value">{{result.a}}</td>
           <td data-th="c Value">{{result.c}}</td>
           <td data-th="p Value">{{result.p}}</td>
           <td data-th="Regime" [routerLink]=" ['/result-details', result._id]">{{result.regime}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+          <td data-th="Action"><a [routerLink]=" ['/result-details', result._id]">See Details</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card>
