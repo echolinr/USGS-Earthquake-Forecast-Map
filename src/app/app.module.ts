@@ -21,6 +21,7 @@ import { ActiveMQService } from '../services/activemq.services';
 
 import { HomePage } from '../pages/home/home';
 import { AddEventPage } from '../pages/addEvent/addEvent';
+import { PdlRegionPage } from '../pages/pdl/pdl';
 import { EventResultsPage } from '../pages/eventResults/eventResults';
 import { ResultDetailsPage } from '../pages/resultDetails/resultDetails';
 import { NoContentPage } from '../pages/noContent/noContent';
@@ -45,6 +46,7 @@ const APP_PROVIDERS = [
     USGSApp,
     HomePage,
     AddEventPage,
+    PdlRegionPage,
     EventResultsPage,
     ResultDetailsPage,
     NoContentPage,

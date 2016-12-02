@@ -1,0 +1,13 @@
+<md-card>
+  <md-card-content>
+    <form [formGroup]="eventForm">
+        <h2>PDL Notificaition Region Filter</h2>
+        <md-input formControlName="minMag" placeholder="Min Magnitude" type="number"></md-input><br>
+        <md-input formControlName="minLat" placeholder="Min Latitude" type="number"></md-input>
+        <md-input formControlName="minLon" placeholder="Min Longitude" type="number"></md-input><br>
+        <md-input formControlName="maxLat" placeholder="Max Latitude" type="number"></md-input>
+        <md-input formControlName="maxLon" placeholder="Max Longitude" type="number"></md-input><br>
+        <button md-raised-button color="primary" (click)="submit()">Update Filter</button>
+    </form>
+  </md-card-content>
+</md-card>
