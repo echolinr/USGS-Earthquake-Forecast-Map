@@ -54,8 +54,8 @@ export class AddEventPage {
       persistent: [false, Validators.compose([Validators.required])],
       minDays: [0, Validators.compose([Validators.required])],
       maxDays: [0, Validators.compose([Validators.required])],
-      regionType: ['WC Circular 1994', Validators.compose([Validators.required])],
-      centerType: ['Epicenter', Validators.compose([Validators.required])],
+      regionType: [{name: 'WC Circular 1994',label: 'WC Circular 1994',id: 0}, Validators.compose([Validators.required])],
+      centerType: [{name: 'Epicenter',label: 'Epicenter',id: 2}, Validators.compose([Validators.required])],
       minDepth: [0, Validators.compose([Validators.required])],
       maxDepth: [1000, Validators.compose([Validators.required])],
       radius: [20],
@@ -85,7 +85,7 @@ export class AddEventPage {
       responseObject.minLocation = { lat: responseObject.minLat, lon: responseObject.minLong, depth: responseObject.minDepth };
       responseObject.maxLocation = { lat: responseObject.maxLat, lon: responseObject.maxLong, depth: responseObject.maxDepth };
       responseObject.circleCenter = { lat: responseObject.centerLat, lon: responseObject.centerLong, depth: responseObject.centerDepth };
-
+      console.log(responseObject);
       this.activemqService.addEvent(responseObject).subscribe(response => {
         if(response){
           console.log(response);
