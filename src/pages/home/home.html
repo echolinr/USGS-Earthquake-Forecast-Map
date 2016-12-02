@@ -1,19 +1,25 @@
-<div class="card-container">
-  <table class="rwd-table">
-    <thead>
-      <tr>
+<md-card>
+  <md-card-content>
+    <md-card-title>
+        Last Events Processed
+    </md-card-title>
+    <md-input #eventId placeholder="Event ID"></md-input>
+    <button md-raised-button color="primary" (click)="search()">Search</button>
+    <table class="rwd-table">
+      <thead>
+        <tr>
           <th>Process Time</th>
           <th>Event Id</th>
           <th>Magnitude</th>
-          <th>Event Time</th>        
-          <th># Aftershocks</th>    
-          <th># Results</th>         
-          <th>Location</th>        
+          <th>Event Time</th>
+          <th># Aftershocks</th>
+          <th># Results</th>
+          <th>Location</th>
           <th>Is Active</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let aftershock of aftershocks">
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aftershock of aftershocks">
           <td data-th="Process Time">{{aftershock.sampleTime | date:'short'}}</td>
           <td data-th="Event Id">{{aftershock.mainShockId}}</td>
           <td data-th="Magnitude">{{aftershock.magnitude}}</td>
@@ -22,7 +28,8 @@
           <td data-th="# Results" [routerLink]=" ['/event-results', aftershock.mainShockId]">{{aftershock.modelResults}}</td>
           <td data-th="Location">{{aftershock.location}}</td>
           <td data-th="Is Active">{{aftershock.isActive}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card>

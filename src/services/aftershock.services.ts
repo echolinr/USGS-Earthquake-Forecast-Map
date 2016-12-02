@@ -20,8 +20,8 @@ export class AftershockService {
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
 
-    getLastResults(id): Observable<any[]> {
-        return this.http.get(this.brandUrl + '/results/' + id + '/lasts')
+    getLastAftershocksById(id): Observable<any[]> {
+        return this.http.get(this.brandUrl + '/lasts/' + id)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().message || 'Server error'));
     }
