@@ -76,7 +76,6 @@ export class AddEventPage {
   }
 
   submit(){
-    console.log(this.eventForm);
     if(this.eventForm.valid){
       let responseObject: any;
       responseObject = this.eventForm.value;
