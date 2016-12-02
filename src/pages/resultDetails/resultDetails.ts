@@ -9,10 +9,11 @@ import { ResultService } from '../../services/result.services';
 })
 export class ResultDetailsPage {
   forecasts: any[];
+  resultId: any;
 
   constructor(public resultService: ResultService, public route: ActivatedRoute) {
-      let id = this.route.snapshot.params['id'];
-    this.resultService.getLastForecast(id).subscribe(forecasts => {
+    this.resultId = this.route.snapshot.params['id'];
+    this.resultService.getLastForecast(this.resultId).subscribe(forecasts => {
       if(forecasts){
         this.forecasts = forecasts[0].forecast;
       }else{
