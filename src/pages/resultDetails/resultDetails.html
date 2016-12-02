@@ -12,10 +12,10 @@
     <tbody>
       <tr *ngFor="let forecast of forecasts">
           <td data-th="Time">{{forecast.label}}</td>
-          <td data-th="Magnitude 3 Likelihood">{{forecast.bins[0].probability}}</td>
-          <td data-th="Magnitude 5 Likelihood">{{forecast.bins[1].probability}}</td>
-          <td data-th="Magnitude 6 Likelihood">{{forecast.bins[2].probability}}</td>
-          <td data-th="Magnitude 7 Likelihood">{{forecast.bins[3].probability}}</td>
+          <td data-th="Magnitude 3 Likelihood">{{forecast.bins[0].probability | percent:'1.2-4'}}</td>
+          <td data-th="Magnitude 5 Likelihood">{{forecast.bins[1].probability | percent:'1.2-4'}}</td>
+          <td data-th="Magnitude 6 Likelihood">{{forecast.bins[2].probability | percent:'1.2-4'}}</td>
+          <td data-th="Magnitude 7 Likelihood">{{forecast.bins[3].probability | percent:'1.2-4'}}</td>
       </tr>
     </tbody>
   </table>
