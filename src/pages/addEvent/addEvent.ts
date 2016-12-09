@@ -51,17 +51,17 @@ export class AddEventPage {
     this.eventForm = formBuilder.group({
       eventId: ['', Validators.compose([Validators.required])],
       emulate: [false, Validators.compose([Validators.required])],
-      persistent: [false, Validators.compose([Validators.required])],
+      persistent: [true, Validators.compose([Validators.required])],
       dataMinDays: [0, Validators.compose([Validators.required])],
-      dataMaxDays: [7, Validators.compose([Validators.required])],
+      dataMaxDays: [0, Validators.compose([Validators.required])],
       regionType: [{name: 'WC Circular 1994',label: 'WC Circular 1994',id: 0}, Validators.compose([Validators.required])],
-      centerType: [{name: 'Epicenter',label: 'Epicenter',id: 2}, Validators.compose([Validators.required])],
+      centerType: [{name: 'Centroid',label: 'Centroid',id: 1}, Validators.compose([Validators.required])],
       minDepth: [0, Validators.compose([Validators.required])],
       maxDepth: [700, Validators.compose([Validators.required])],
       radius: [20],
       centerLat: [0],
       centerLong: [0],
-      centerDepth: [1000],
+      centerDepth: [700],
       minLat: [0],
       maxLat: [0],
       minLong: [0],
@@ -72,6 +72,10 @@ export class AddEventPage {
       maxP: [0.98, Validators.compose([Validators.required])],
       minC: [0.018, Validators.compose([Validators.required])],
       maxC: [0.018, Validators.compose([Validators.required])],
+      g: [0.25, Validators.compose([Validators.required])],
+      b: [1.0, Validators.compose([Validators.required])],
+      h: [1.0, Validators.compose([Validators.required])],
+      magCat: [4.5, Validators.compose([Validators.required])],
     });
   }
 
@@ -94,6 +98,11 @@ export class AddEventPage {
       delete responseObject.maxLat;
       delete responseObject.minLong;
       delete responseObject.maxLong;
+      /** Temp */
+      delete responseObject.g;
+      delete responseObject.b;
+      delete responseObject.h;
+      delete responseObject.magCat;
 
       if(responseObject.emulate){
         responseObject.dataMaxDays = 0.167; //4 hours in days
