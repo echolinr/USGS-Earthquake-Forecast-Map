@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PdlRegionPage {
   submitAttempt = false;
   eventForm: FormGroup;
+  filters: any[];
 
 
   constructor(public formBuilder: FormBuilder) {

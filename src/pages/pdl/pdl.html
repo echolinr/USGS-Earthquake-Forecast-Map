@@ -9,5 +9,28 @@
         <md-input formControlName="maxLon" placeholder="Max Longitude" type="number"></md-input><br>
         <button md-raised-button color="primary" (click)="submit()">Update Filter</button>
     </form>
+    <h2>Active Filters</h2>
+    <table class="rwd-table">
+      <thead>
+        <tr>
+          <th>Min Magnitude</th>
+          <th>Min Latitude</th>
+          <th>Min Longitude</th>
+          <th>Max Latitude</th>
+          <th>Max Longitude</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let filter of filters">
+          <td data-th="Min Magnitude">{{filter.minMag}}</td>
+          <td data-th="Min Latitude">{{filter.minLat}}</td>
+          <td data-th="Min Longitude">{{filter.minLon}}</td>
+          <td data-th="Max Latitude">{{filter.maxLat}}</td>
+          <td data-th="Max Longitude">{{filter.maxLon}}</td>
+          <td data-th="Actions">Delete</td>
+        </tr>
+      </tbody>
+    </table>
   </md-card-content>
 </md-card>

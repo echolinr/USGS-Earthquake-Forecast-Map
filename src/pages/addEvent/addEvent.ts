@@ -98,11 +98,6 @@ export class AddEventPage {
       delete responseObject.maxLat;
       delete responseObject.minLong;
       delete responseObject.maxLong;
-      /** Temp */
-      delete responseObject.g;
-      delete responseObject.b;
-      delete responseObject.h;
-      delete responseObject.magCat;
 
       if(responseObject.emulate){
         responseObject.dataMaxDays = 0.167; //4 hours in days
