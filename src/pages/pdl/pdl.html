@@ -13,6 +13,7 @@
     <table class="rwd-table">
       <thead>
         <tr>
+          <th>Filter Name</th>
           <th>Min Magnitude</th>
           <th>Min Latitude</th>
           <th>Min Longitude</th>
@@ -23,6 +24,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let filter of filters">
+          <td data-th="Filter Name">{{filter.name}}</td>
           <td data-th="Min Magnitude">{{filter.minMag}}</td>
           <td data-th="Min Latitude">{{filter.minLat}}</td>
           <td data-th="Min Longitude">{{filter.minLon}}</td>
