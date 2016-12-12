@@ -2,6 +2,7 @@
   <md-card-content>
     <form [formGroup]="eventForm">
         <h2>PDL Notificaition Region Filter</h2>
+        <md-input formControlName="name" placeholder="Filter Name" type="text"></md-input>
         <md-input formControlName="minMag" placeholder="Min Magnitude" type="number"></md-input><br>
         <md-input formControlName="minLat" placeholder="Min Latitude" type="number"></md-input>
         <md-input formControlName="minLon" placeholder="Min Longitude" type="number"></md-input><br>
@@ -30,7 +31,7 @@
           <td data-th="Min Longitude">{{filter.minLon}}</td>
           <td data-th="Max Latitude">{{filter.maxLat}}</td>
           <td data-th="Max Longitude">{{filter.maxLon}}</td>
-          <td data-th="Actions">Delete</td>
+          <td data-th="Actions"><button  md-raised-button color="primary" (click)="delete(filter.name)">Delete</button></td>
         </tr>
       </tbody>
     </table>

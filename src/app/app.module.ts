@@ -16,6 +16,7 @@ import { ROUTES } from './app.routes';
 import { USGSApp } from './app.component';
 import { Configuration } from './app.constants';
 import { AftershockService } from '../services/aftershock.services';
+import { PDLService } from '../services/pdl.services';
 import { ResultService } from '../services/result.services';
 import { ActiveMQService } from '../services/activemq.services';
 
@@ -36,6 +37,7 @@ import { NoContentPage } from '../pages/noContent/noContent';
 const APP_PROVIDERS = [
   Configuration,
   AftershockService,
+  PDLService,
   ResultService,
   ActiveMQService
 ];
