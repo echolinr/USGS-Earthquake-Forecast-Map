@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { PDLService } from '../../services/pdl.services';
+
 @Component({
   styleUrls: ['./pdl.scss'],
   templateUrl: './pdl.html'
@@ -11,13 +13,23 @@ export class PdlRegionPage {
   filters: any[];
 
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, public pdlService: PDLService) {
     this.eventForm = formBuilder.group({
       minMag: [1.0, Validators.compose([Validators.required])],
       minLat: [33.0, Validators.compose([Validators.required])],
       minLon: [-124.0, Validators.compose([Validators.required])],
       maxLat: [42.0, Validators.compose([Validators.required])],
       maxLon: [-120.0, Validators.compose([Validators.required])],
+    });
+
+    this.pdlService.getLastPDLFilters().subscribe(filters => {
+      if(filters){
+        this.filters = filters;
+      }else{
+        console.log('No Data');
+      }
+    }, error => {      
+        console.log(error);
     });
   }
 
