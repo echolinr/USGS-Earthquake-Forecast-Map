@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-//import { HttpService } from './http.services';
 import { Configuration } from '../app/app.constants';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -9,10 +8,10 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ActiveMQService {    
-    private activeMQUrl: string; 
+    private activeMQUrl: string = 'activemq'; 
 
     constructor(private http: Http, private config: Configuration) { 
-        this.activeMQUrl = config.ActiveMQUrl;
+        this.activeMQUrl = config.ServerWithApiUrl + this.activeMQUrl;
     }
 
     addEvent(body: Object): Observable<any> {
@@ -20,8 +19,7 @@ export class ActiveMQService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.activeMQUrl + '?destination=queue://Comcat&oneShot=true', bodyString, options)
-            .map((res: Response) => {console.log('res', res);res.json()})
+        return this.http.post(this.activeMQUrl + '/comcat', bodyString, options)
             .catch((error: any) => Observable.throw(error.json().message || 'Server error' + error));
     }
 }

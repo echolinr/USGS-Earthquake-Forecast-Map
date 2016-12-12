@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 import { ActiveMQService } from '../../services/activemq.services';
 
@@ -47,8 +48,12 @@ export class AddEventPage {
     }
   ];
 
-  constructor(public formBuilder: FormBuilder, public activemqService: ActiveMQService) {
-    this.eventForm = formBuilder.group({
+  constructor(public formBuilder: FormBuilder, public activemqService: ActiveMQService, public snackBar: MdSnackBar) {
+    this.initForm();
+  }
+
+  initForm(){
+    this.eventForm = this.formBuilder.group({
       eventId: ['', Validators.compose([Validators.required])],
       emulate: [false, Validators.compose([Validators.required])],
       persistent: [true, Validators.compose([Validators.required])],
@@ -102,10 +107,11 @@ export class AddEventPage {
       if(responseObject.emulate){
         responseObject.dataMaxDays = 0.167; //4 hours in days
       }
-      console.log(responseObject);
+
       this.activemqService.addEvent(responseObject).subscribe(response => {
         if(response){
           console.log(response);
+          this.snackBar.open('Event Added Sucessfully');
         }else{
           console.log('Empty Result');
         }
