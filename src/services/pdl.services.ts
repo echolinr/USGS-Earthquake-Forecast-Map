@@ -26,13 +26,11 @@ export class PDLService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.brandUrl + '/filters', bodyString, options)
-            .map((res: Response) => {console.log('res', res);res.json()})
             .catch((error: any) => Observable.throw(error.json().message || 'Server error' + error));
     }
 
     deletePDLFilter(filterName: string): Observable<any> {
         return this.http.delete(this.brandUrl + '/filters/' + filterName)
-            .map((res: Response) => {console.log('res', res);res.json()})
             .catch((error: any) => Observable.throw(error.json().message || 'Server error' + error));
     }
 
