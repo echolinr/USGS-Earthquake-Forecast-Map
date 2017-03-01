@@ -4,7 +4,9 @@
         Last Events Processed
     </md-card-title>
     <md-divider></md-divider>
-    <md-input #eventId placeholder="Event ID"></md-input>
+    <md-input-container>
+      <input mdInput #eventId placeholder="Event ID"/>
+    </md-input-container>
     <button md-raised-button color="primary" (click)="search()">Search</button>
     <table class="rwd-table">
       <thead>

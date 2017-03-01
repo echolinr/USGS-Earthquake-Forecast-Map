@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MdInput } from '@angular/material';
+import { MdInputDirective } from '@angular/material';
 
 import { AftershockService } from '../../services/aftershock.services';
 
@@ -10,7 +10,7 @@ import { AftershockService } from '../../services/aftershock.services';
 })
 export class HomePage {
   aftershocks: any[];
-   @ViewChild('eventId') eventId: MdInput;
+   @ViewChild('eventId') eventId: MdInputDirective;
 
   constructor(public aftershockService: AftershockService) {
     this.aftershockService.getLastAftershocks().subscribe(aftershocks => {
