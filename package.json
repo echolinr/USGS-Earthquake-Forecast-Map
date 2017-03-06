@@ -81,6 +81,10 @@
     "ie-shim": "^0.1.0",
     "ng2-material": "^0.8.1",
     "ng2-material-select": "^0.1.5",
+    "leaflet": "^1.0.3",
+    "font-awesome": "^4.7.0",
+    "geojson-vt": "^2.4.0",
+    "leaflet.vectorgrid": "^1.2.0",
     "rxjs": "5.2.0",
     "zone.js": "~0.7.7"
   },
@@ -93,6 +97,8 @@
     "@types/source-map": "^0.5.0",
     "@types/uglify-js": "^2.6.28",
     "@types/webpack": "^2.2.7",
+    "@types/leaflet": "^1.0.55",
+    "@types/geojson": "^1.0.0",
     "angular2-router-loader": "^0.3.5",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.0.8",
@@ -139,7 +145,8 @@
     "webpack-dev-middleware": "^1.10.1",
     "webpack-dev-server": "2.4.1",
     "webpack-md5-hash": "^0.0.5",
-    "webpack-merge": "3.0.0"
+    "webpack-merge": "4.0.0",
+    "extract-text-webpack-plugin": "^2.1.0"
   },
   "repository": {
     "type": "git",
