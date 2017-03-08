@@ -14,6 +14,11 @@ import '@angular/forms';
 import '@angular/http';
 import '@angular/router';
 
+import 'leaflet';
+import 'leaflet.vectorgrid';
+import 'leaflet.heat';
+import "leaflet/dist/leaflet.css";
+
 // AngularClass
 import '@angularclass/hmr';
 

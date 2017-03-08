@@ -5,11 +5,13 @@ import { ResultDetailsPage } from '../pages/resultDetails/resultDetails';
 import { AddEventPage } from '../pages/addEvent/addEvent';
 import { PdlRegionPage } from '../pages/pdl/pdl';
 import { NoContentPage } from '../pages/noContent/noContent';
+import { MapPage } from '../pages/map/map';
 
 
 export const ROUTES: Routes = [
   { path: '',      component: HomePage },
   { path: 'home',  component: HomePage },
+  { path: 'map',  component: MapPage },
   { path: 'add-event', component: AddEventPage },
   { path: 'pdl', component: PdlRegionPage },
   { path: 'event-results/:id', component: EventResultsPage },

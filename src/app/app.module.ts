@@ -20,12 +20,18 @@ import { PDLService } from '../services/pdl.services';
 import { ResultService } from '../services/result.services';
 import { ActiveMQService } from '../services/activemq.services';
 
+
+import { MapService } from '../services/map.service';
+import { GeocodingService } from '../services/geocoding.service';
+
 import { HomePage } from '../pages/home/home';
 import { AddEventPage } from '../pages/addEvent/addEvent';
 import { PdlRegionPage } from '../pages/pdl/pdl';
 import { EventResultsPage } from '../pages/eventResults/eventResults';
 import { ResultDetailsPage } from '../pages/resultDetails/resultDetails';
 import { NoContentPage } from '../pages/noContent/noContent';
+
+import { MapPage } from '../pages/map/map';
 
 /*function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
   return new HttpClient(xhrBackend, requestOptions);
@@ -39,7 +45,9 @@ const APP_PROVIDERS = [
   AftershockService,
   PDLService,
   ResultService,
-  ActiveMQService
+  ActiveMQService,
+  MapService,
+  GeocodingService
 ];
 
 @NgModule({
@@ -52,6 +60,7 @@ const APP_PROVIDERS = [
     EventResultsPage,
     ResultDetailsPage,
     NoContentPage,
+    MapPage,
   ],
   imports: [
     BrowserModule,

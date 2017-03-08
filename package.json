@@ -82,6 +82,7 @@
     "ng2-material": "^0.8.1",
     "ng2-material-select": "^0.1.5",
     "leaflet": "^1.0.3",
+    "leaflet.heat": "^0.2.0",
     "font-awesome": "^4.7.0",
     "geojson-vt": "^2.4.0",
     "leaflet.vectorgrid": "^1.2.0",
