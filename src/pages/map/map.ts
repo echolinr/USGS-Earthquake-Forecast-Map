@@ -1,13 +1,15 @@
-import {Component, ViewChild, OnDestroy } from "@angular/core";
+import {Component, ViewChild, ElementRef, animate, OnDestroy} from "@angular/core";
 import {MapService} from "../../services/map.service";
 import {GeocodingService} from "../../services/geocoding.service";
 import {Location} from "../../core/location.class";
 import {Subscription} from "rxjs";
 import {Router, ActivatedRoute} from "@angular/router";
 
+declare var google: any;
+
 @Component({
-    templateUrl: "./map.html",
-    styleUrls: ['./map.scss']
+  templateUrl: "./map.html",
+  styleUrls: ['./map.scss']
 })
 export class MapPage implements OnDestroy {
   private subscription: Subscription;
@@ -16,6 +18,11 @@ export class MapPage implements OnDestroy {
   private centerLat: number = 0;
   private centerLng: number = 0;
   private hasParams: boolean = false;
+
+  autocompleteItems: any;
+  autocomplete: any;
+  acService: any;
+  map: any;
 
     constructor(private mapService: MapService, private geocoder: GeocodingService,
                 private activatedRoute: ActivatedRoute, private router: Router) {
@@ -63,6 +70,13 @@ export class MapPage implements OnDestroy {
               err => console.error(err)
             );
         }
+
+        this.acService = new google.maps.places.AutocompleteService();
+        this.autocompleteItems = [];
+        this.autocomplete = {
+          query: ''
+        };
+
         map.on('zoomend', () => {
           this.mapZoom = map.getZoom();
           this.centerLat = map.getCenter().lat;
@@ -78,6 +92,49 @@ export class MapPage implements OnDestroy {
           this.router.navigate(['map'],{queryParams:{'lat':this.centerLat, 'lng':this.centerLng, 'zoomLevel':this.mapZoom}});
         })
     }
+
+
+  updateSearch() {
+    if (this.autocomplete.query == '') {
+      this.autocompleteItems = [];
+      return;
+    }
+
+    let self = this;
+
+    let config = {
+      input: this.autocomplete.query
+    }
+
+    this.acService.getPlacePredictions(config, function (predictions, status) {
+      self.autocompleteItems = [];
+      if (typeof predictions !== 'undefined') {
+        predictions.forEach(function (prediction) {
+          self.autocompleteItems.push(prediction);
+        });
+      }
+    });
+  }
+
+  moveMap(place: any) {
+    var self = this;
+    self.autocomplete.query = place.description;
+    let place_id = place.place_id;
+    var geocoder = new google.maps.Geocoder;
+    geocoder.geocode({'placeId': place_id}, function (results, status) {
+      if (status === 'OK') {
+        if (results[0]) {
+          let location = results[0].geometry.location;
+          let latlng = L.latLng(location.lat(), location.lng());
+          self.map.setView(latlng, 10, {animation: true});
+        } else {
+          console.log(status);
+        }
+      } else {
+        console.log(status);
+      }
+    });
+  }
 
     ngOnDestroy() {
       this.subscription.unsubscribe();
