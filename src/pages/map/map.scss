@@ -2,3 +2,23 @@
 #map {
     height: 600px
 }
+
+#placesearch {
+  position: absolute;
+  top: 50px;
+  left: 60px;
+  z-index: 10000;
+}
+
+md-input-container {
+  width: 300px;
+}
+
+md-option {
+  width: 400px;
+  font-size: small;
+}
+
+md-autocomplete{
+  width: 400px;
+}

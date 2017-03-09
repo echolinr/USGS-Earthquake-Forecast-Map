@@ -1,1 +1,13 @@
-<div id="map"></div>
+<div id="map">
+  <div id="placesearch">
+    <md-input-container>
+      <input type="text" mdInput placeholder="Search for location" [mdAutocomplete]="results" (ngModelChange)="updateSearch()"
+             [(ngModel)]="autocomplete.query">
+    </md-input-container>
+    <md-autocomplete #results="mdAutocomplete">
+      <md-option *ngFor="let item of autocompleteItems" (click)="moveMap(item)">
+        {{ item.description }}
+      </md-option>
+    </md-autocomplete>
+  </div>
+</div>
