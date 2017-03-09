@@ -32,6 +32,7 @@ import { ResultDetailsPage } from '../pages/resultDetails/resultDetails';
 import { NoContentPage } from '../pages/noContent/noContent';
 
 import { MapPage } from '../pages/map/map';
+import { DisclaimerPage} from '../pages/disclaimer/disclaimer';
 
 /*function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
   return new HttpClient(xhrBackend, requestOptions);
@@ -61,6 +62,7 @@ const APP_PROVIDERS = [
     ResultDetailsPage,
     NoContentPage,
     MapPage,
+    DisclaimerPage,
   ],
   imports: [
     BrowserModule,

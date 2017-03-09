@@ -6,12 +6,14 @@ import { AddEventPage } from '../pages/addEvent/addEvent';
 import { PdlRegionPage } from '../pages/pdl/pdl';
 import { NoContentPage } from '../pages/noContent/noContent';
 import { MapPage } from '../pages/map/map';
+import { DisclaimerPage } from '../pages/disclaimer/disclaimer';
 
 
 export const ROUTES: Routes = [
   { path: '',      component: HomePage },
   { path: 'home',  component: HomePage },
   { path: 'map',  component: MapPage },
+  { path: 'disclaimer', component: DisclaimerPage},
   { path: 'add-event', component: AddEventPage },
   { path: 'pdl', component: PdlRegionPage },
   { path: 'event-results/:id', component: EventResultsPage },
