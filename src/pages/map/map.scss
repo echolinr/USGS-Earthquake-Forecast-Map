@@ -4,14 +4,19 @@
 }
 
 #placesearch {
-  position: absolute;
-  top: 50px;
-  left: 60px;
+  position: relative;
+  top: 80%;
   z-index: 10000;
+  text-align: center;
+}
+
+md-slider {
+  box-sizing: content-box!important;
 }
 
 md-input-container {
   width: 300px;
+  margin-left: 10px;
 }
 
 md-option {
@@ -21,4 +26,18 @@ md-option {
 
 md-autocomplete{
   width: 400px;
+}
+
+#mapToolbar {
+  font-size: small;
+}
+
+#myLocation {
+  float: right;
+  margin-right: 5%;
+}
+
+#preferences {
+  min-width: initial;
+  margin-left: 5px;
 }

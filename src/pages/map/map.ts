@@ -13,10 +13,10 @@ declare var google: any;
 })
 export class MapPage implements OnDestroy {
   private subscription: Subscription;
-  private mapZoom: number;
+  private mapZoom: number = 12;
   private mapScale: string;
-  private centerLat: number = 0;
-  private centerLng: number = 0;
+  private centerLat: number = 40.731253;
+  private centerLng: number = -73.996139;
   private hasParams: boolean = false;
 
   autocompleteItems: any;
@@ -33,18 +33,13 @@ export class MapPage implements OnDestroy {
             this.centerLng = Number.parseFloat(queryParam['lng']);
             this.mapZoom = Number.parseInt(queryParam['zoomLevel']);
             this.hasParams = true;
-          }  else {
-            this.mapZoom = 12;
-            this.centerLat = 40.731253;
-            this.centerLng = -73.996139;
-            this.hasParams = false;
           }
         }
       );
     }
 
     ngOnInit() {
-      let map = L.map("map", {
+      this.map = L.map("map", {
             zoomControl: false,
             center: L.latLng(this.centerLat, this.centerLng),
             zoom: this.mapZoom,
@@ -53,20 +48,20 @@ export class MapPage implements OnDestroy {
             layers: [this.mapService.baseMaps.CartoDB]
         });
 
-        L.control.zoom({ position: "topright" }).addTo(map);
-        L.control.layers(this.mapService.baseMaps).addTo(map);
-        L.control.scale().addTo(map);
+        L.control.zoom({ position: "topright" }).addTo(this.map);
+        L.control.layers(this.mapService.baseMaps).addTo(this.map);
+        L.control.scale().addTo(this.map);
 
         L.heatLayer([
             [40.7, -73.9, 0.2], // lat, lng, intensity
             [40.6, -73.8, 0.5]
-        ], {radius: 25}).addTo(map);
+        ], {radius: 25}).addTo(this.map);
 
-        this.mapService.map = map;
+        this.mapService.map = this.map;
         if (!this.hasParams) {
           this.geocoder.getCurrentLocation()
             .subscribe(
-              location => map.panTo([location.latitude, location.longitude]),
+              location => this.map.panTo([location.latitude, location.longitude]),
               err => console.error(err)
             );
         }
@@ -77,18 +72,18 @@ export class MapPage implements OnDestroy {
           query: ''
         };
 
-        map.on('zoomend', () => {
-          this.mapZoom = map.getZoom();
-          this.centerLat = map.getCenter().lat;
-          this.centerLng = map.getCenter().lng;
+        this.map.on('zoomend', () => {
+          this.mapZoom = this.map.getZoom();
+          this.centerLat = this.map.getCenter().lat;
+          this.centerLng = this.map.getCenter().lng;
           this.mapScale = this.scaleLookup(this.mapZoom);
           this.router.navigate(['map'],{queryParams:{'lat':this.centerLat, 'lng':this.centerLng, 'zoomLevel':this.mapZoom}});
         });
 
-        map.on('mousemove', () => {
-          this.mapZoom = map.getZoom();
-          this.centerLat = map.getCenter().lat;
-          this.centerLng = map.getCenter().lng;
+        this.map.on('mousemove', () => {
+          this.mapZoom = this.map.getZoom();
+          this.centerLat = this.map.getCenter().lat;
+          this.centerLng = this.map.getCenter().lng;
           this.router.navigate(['map'],{queryParams:{'lat':this.centerLat, 'lng':this.centerLng, 'zoomLevel':this.mapZoom}});
         })
     }
@@ -117,10 +112,10 @@ export class MapPage implements OnDestroy {
   }
 
   moveMap(place: any) {
-    var self = this;
+    let self = this;
     self.autocomplete.query = place.description;
     let place_id = place.place_id;
-    var geocoder = new google.maps.Geocoder;
+    let geocoder = new google.maps.Geocoder;
     geocoder.geocode({'placeId': place_id}, function (results, status) {
       if (status === 'OK') {
         if (results[0]) {
