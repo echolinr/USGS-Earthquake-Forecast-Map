@@ -13,18 +13,35 @@
       {{ item.description }}
     </md-option>
   </md-autocomplete>
+  
+  <md-button-toggle-group>
+    <md-button-toggle md-button value="earthquakes" selected>Today's Earthquakes</md-button-toggle>
+    <md-button-toggle md-button value="places">My Places</md-button-toggle>
+  </md-button-toggle-group>
+
   <span class="example-fill-remaining-space"></span>
-  <md-icon>help</md-icon>
+  <button md-icon-button><md-icon>accessible</md-icon></button>
+  <button md-icon-button><md-icon>help</md-icon></button>
   <button id="preferences" md-raised-button><md-icon>file_download</md-icon> Preferences</button>
 </md-toolbar>
 <div id="map">
-  
-  <div id="placesearch">
-    <md-icon>fast_rewind</md-icon>
-    <md-icon>play_arrow</md-icon>    
-    <md-icon>pause</md-icon>
-    <md-icon>fast_forward</md-icon>
-    <md-slider min="1" max="50" step="0.5" value="1.5"></md-slider>
-    <button id="myLocation" md-mini-fab><md-icon>location_searching</md-icon></button>
+  <div id="placeInfo" *ngIf="this.showDetails">
+    <md-chip selected="true" color="accent">
+      Status: Warning
+    </md-chip><br/>
+    <button md-raised-button color="primary">Save Location</button><br/>
+    <button md-raised-button>Print</button><br/>
+    <button md-raised-button>Notifications</button>
   </div>
+  <div id="dateRange" *ngIf="this.showDetails">
+    <my-date-range-picker [options]="myDateRangePickerOptions"></my-date-range-picker>
+  </div>
+  <div id="placesearch">
+    <button md-icon-button><md-icon>fast_rewind</md-icon></button>
+    <button md-icon-button><md-icon>play_arrow</md-icon></button>
+    <button md-icon-button><md-icon>pause</md-icon></button>
+    <button md-icon-button><md-icon>fast_forward</md-icon></button>
+    <md-slider min="1" max="50" step="0.5" value="1.5"></md-slider>
+  </div>  
+  <button id="myLocation" md-mini-fab><md-icon>location_searching</md-icon></button>
 </div>

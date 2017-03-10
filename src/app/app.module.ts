@@ -34,6 +34,8 @@ import { NoContentPage } from '../pages/noContent/noContent';
 import { MapPage } from '../pages/map/map';
 import { DisclaimerPage} from '../pages/disclaimer/disclaimer';
 
+import { MyDateRangePickerModule } from 'mydaterangepicker';
+
 /*function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
   return new HttpClient(xhrBackend, requestOptions);
 }*/
@@ -69,6 +71,7 @@ const APP_PROVIDERS = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    MyDateRangePickerModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule.forRoot(),
     Ng2SelectModule

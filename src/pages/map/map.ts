@@ -4,6 +4,7 @@ import {GeocodingService} from "../../services/geocoding.service";
 import {Location} from "../../core/location.class";
 import {Subscription} from "rxjs";
 import {Router, ActivatedRoute} from "@angular/router";
+import {IMyOptions} from 'mydaterangepicker';
 
 declare var google: any;
 
@@ -19,10 +20,29 @@ export class MapPage implements OnDestroy {
   private centerLng: number = -73.996139;
   private hasParams: boolean = false;
 
+  showDetails: boolean = false;
+
   autocompleteItems: any;
   autocomplete: any;
   acService: any;
   map: any;
+
+  myDateRangePickerOptions: IMyOptions = {
+        clearBtnTxt: 'Clear',
+        beginDateBtnTxt: 'Begin Date',
+        endDateBtnTxt: 'End Date',
+        acceptBtnTxt: 'OK',
+        dateFormat: 'mmm dd (yyyy)',
+        firstDayOfWeek: 'mo',
+        sunHighlight: true,
+        height: '34px',
+        width: '260px',
+        inline: false,
+        selectionTxtFontSize: '14px',
+        alignSelectorRight: false,
+        indicateInvalidDateRange: true,
+
+    };
 
     constructor(private mapService: MapService, private geocoder: GeocodingService,
                 private activatedRoute: ActivatedRoute, private router: Router) {
@@ -39,6 +59,7 @@ export class MapPage implements OnDestroy {
     }
 
     ngOnInit() {
+      
       this.map = L.map("map", {
             zoomControl: false,
             center: L.latLng(this.centerLat, this.centerLng),
@@ -48,13 +69,38 @@ export class MapPage implements OnDestroy {
             layers: [this.mapService.baseMaps.CartoDB]
         });
 
+        if(this.mapZoom == 10){
+          this.showDetails = true;
+        }
+
         L.control.zoom({ position: "topright" }).addTo(this.map);
         L.control.layers(this.mapService.baseMaps).addTo(this.map);
         L.control.scale().addTo(this.map);
 
         L.heatLayer([
-            [40.7, -73.9, 0.2], // lat, lng, intensity
-            [40.6, -73.8, 0.5]
+            [37.32, -121.83357, 0.2], // lat, lng, intensity
+            [37.33, -121.83358, 0.5],
+            [37.34, -121.83358, 0.3],
+            [37.35, -121.83358, 0.25],
+            [37.36, -121.83358, 0.20],
+            [37.37, -121.83358, 0.15],
+            [37.38, -121.83358, 0.10],
+            [37.39, -121.83358, 0.3],
+            [37.40, -121.83358, 0.5],
+            [37.41, -121.83358, 0.25],
+            [37.42, -121.83358, 0.10],
+            [37.43, -121.84, 0.2],
+            [37.33, -121.85, 0.5],
+            [37.34, -121.86, 0.3],
+            [37.35, -121.87, 0.25],
+            [37.36, -121.88, 0.20],
+            [37.37, -121.89, 0.15],
+            [37.38, -121.90, 0.10],
+            [37.39, -121.91, 0.3],
+            [37.40, -121.92, 0.5],
+            [37.41, -121.93, 0.25],
+            [37.42, -121.94, 0.10],
+            [37.43, -121.95, 0.15],
         ], {radius: 25}).addTo(this.map);
 
         this.mapService.map = this.map;
@@ -77,6 +123,11 @@ export class MapPage implements OnDestroy {
           this.centerLat = this.map.getCenter().lat;
           this.centerLng = this.map.getCenter().lng;
           this.mapScale = this.scaleLookup(this.mapZoom);
+          if (this.mapZoom == 10){
+            this.showDetails = true;
+          }else{
+            this.showDetails = false;
+          }
           this.router.navigate(['map'],{queryParams:{'lat':this.centerLat, 'lng':this.centerLng, 'zoomLevel':this.mapZoom}});
         });
 
