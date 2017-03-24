@@ -1,7 +1,7 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
+import { HttpModule, Http, RequestOptions, XHRBackend, JsonpModule} from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 //import { HttpClient } from '../services/httpClient.services';
@@ -35,6 +35,7 @@ import { MapPage } from '../pages/map/map';
 import { DisclaimerPage} from '../pages/disclaimer/disclaimer';
 
 import { MyDateRangePickerModule } from 'mydaterangepicker';
+import { SpatialForcastService } from "../services/spatialforcast.service";
 
 /*function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
   return new HttpClient(xhrBackend, requestOptions);
@@ -50,7 +51,8 @@ const APP_PROVIDERS = [
   ResultService,
   ActiveMQService,
   MapService,
-  GeocodingService
+  GeocodingService,
+  SpatialForcastService
 ];
 
 @NgModule({
@@ -74,7 +76,8 @@ const APP_PROVIDERS = [
     MyDateRangePickerModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule.forRoot(),
-    Ng2SelectModule
+    Ng2SelectModule,
+    JsonpModule
   ],
   providers: [
     ENV_PROVIDERS,
