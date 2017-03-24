@@ -5,6 +5,8 @@ import {Location} from "../../core/location.class";
 import {Subscription} from "rxjs";
 import {Router, ActivatedRoute} from "@angular/router";
 import {IMyOptions} from 'mydaterangepicker';
+import {PointForcast} from "../../core/pointForcast.class";
+import {SpatialForcastService} from "../../services/spatialforcast.service";
 
 declare var google: any;
 
@@ -45,7 +47,8 @@ export class MapPage implements OnDestroy {
     };
 
     constructor(private mapService: MapService, private geocoder: GeocodingService,
-                private activatedRoute: ActivatedRoute, private router: Router) {
+                private activatedRoute: ActivatedRoute, private router: Router,
+                private spatialForcastService: SpatialForcastService) {
       this.subscription = activatedRoute.queryParams.subscribe(
         (queryParam: any) =>  {
           if(queryParam['lat']) {
@@ -56,10 +59,12 @@ export class MapPage implements OnDestroy {
           }
         }
       );
+
+      this.spatialForcastService.readSpatialForcastDataDone.subscribe(event => this.addDefaultHeatLayer());
     }
 
     ngOnInit() {
-      
+
       this.map = L.map("map", {
             zoomControl: false,
             center: L.latLng(this.centerLat, this.centerLng),
@@ -77,6 +82,10 @@ export class MapPage implements OnDestroy {
         L.control.layers(this.mapService.baseMaps).addTo(this.map);
         L.control.scale().addTo(this.map);
 
+        //prepare forcast data
+        this.spatialForcastService.readSpatialForcastData();
+
+        /*
         L.heatLayer([
             [37.32, -121.83357, 0.2], // lat, lng, intensity
             [37.33, -121.83358, 0.5],
@@ -102,7 +111,7 @@ export class MapPage implements OnDestroy {
             [37.42, -121.94, 0.10],
             [37.43, -121.95, 0.15],
         ], {radius: 25}).addTo(this.map);
-
+        */
         this.mapService.map = this.map;
         if (!this.hasParams) {
           this.geocoder.getCurrentLocation()
@@ -112,7 +121,8 @@ export class MapPage implements OnDestroy {
             );
         }
 
-        this.acService = new google.maps.places.AutocompleteService();
+
+      this.acService = new google.maps.places.AutocompleteService();
         this.autocompleteItems = [];
         this.autocomplete = {
           query: ''
@@ -180,6 +190,11 @@ export class MapPage implements OnDestroy {
         console.log(status);
       }
     });
+  }
+
+  addDefaultHeatLayer() {
+    this.spatialForcastService.getHeatData(8,0.1);
+    L.heatLayer(this.spatialForcastService.heatData, {radius: 25}).addTo(this.map);
   }
 
     ngOnDestroy() {

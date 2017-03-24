@@ -1,7 +1,7 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, Http, RequestOptions, XHRBackend } from '@angular/http';
+import { HttpModule, Http, RequestOptions, XHRBackend, JsonpModule} from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 //import { HttpClient } from '../services/httpClient.services';
@@ -39,6 +39,7 @@ import { TestD3Component } from '../pages/example/example';
 import { D3Service } from 'd3-ng2-service';
 
 import { MyDateRangePickerModule } from 'mydaterangepicker';
+import { SpatialForcastService } from "../services/spatialforcast.service";
 
 /*function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
   return new HttpClient(xhrBackend, requestOptions);
@@ -55,7 +56,8 @@ const APP_PROVIDERS = [
   ActiveMQService,
   MapService,
   GeocodingService,
-  D3Service
+  D3Service,
+  SpatialForcastService
 ];
 
 @NgModule({
@@ -80,7 +82,8 @@ const APP_PROVIDERS = [
     MyDateRangePickerModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MaterialModule.forRoot(),
-    Ng2SelectModule
+    Ng2SelectModule,
+    JsonpModule
   ],
   providers: [
     ENV_PROVIDERS,
