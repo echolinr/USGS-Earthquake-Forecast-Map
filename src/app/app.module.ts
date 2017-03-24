@@ -34,6 +34,10 @@ import { NoContentPage } from '../pages/noContent/noContent';
 import { MapPage } from '../pages/map/map';
 import { DisclaimerPage} from '../pages/disclaimer/disclaimer';
 
+
+import { TestD3Component } from '../pages/example/example';
+import { D3Service } from 'd3-ng2-service';
+
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 /*function httpClientFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
@@ -50,7 +54,8 @@ const APP_PROVIDERS = [
   ResultService,
   ActiveMQService,
   MapService,
-  GeocodingService
+  GeocodingService,
+  D3Service
 ];
 
 @NgModule({
@@ -65,6 +70,7 @@ const APP_PROVIDERS = [
     NoContentPage,
     MapPage,
     DisclaimerPage,
+    TestD3Component
   ],
   imports: [
     BrowserModule,

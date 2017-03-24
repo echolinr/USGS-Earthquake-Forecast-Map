@@ -22,7 +22,20 @@
   <span class="example-fill-remaining-space"></span>
   <button md-icon-button><md-icon>accessible</md-icon></button>
   <button md-icon-button><md-icon>help</md-icon></button>
-  <button id="preferences" md-raised-button><md-icon>file_download</md-icon> Preferences</button>
+  <!--<button id="preferences" md-raised-button><md-icon>file_download</md-icon> Preferences</button>-->
+  <button md-icon-button [mdMenuTriggerFor]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+  <md-menu #menu="mdMenu">
+    <button md-menu-item disabled>
+      <md-icon>file_download</md-icon>
+      <span>Save</span>
+    </button>
+    <button md-menu-item>
+      <md-icon>file_upload</md-icon>
+      <span>Upload</span>
+    </button>
+  </md-menu>
 </md-toolbar>
 <div id="map">
   <div id="placeInfo" *ngIf="this.showDetails">

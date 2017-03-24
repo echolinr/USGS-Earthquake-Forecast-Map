@@ -14,7 +14,7 @@ declare var google: any;
 })
 export class MapPage implements OnDestroy {
   private subscription: Subscription;
-  private mapZoom: number = 12;
+  private mapZoom: number = 10;
   private mapScale: string;
   private centerLat: number = 40.731253;
   private centerLng: number = -73.996139;
