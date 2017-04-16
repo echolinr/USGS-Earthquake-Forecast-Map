@@ -14,7 +14,10 @@
         </md-input-container>
         <md-slide-toggle formControlName="persistent" color="primary">Is Persistent</md-slide-toggle>
         <h2>Region</h2>
-        <ng2-select name='regionType' [placeholder]="'Region Type'"
+        <md-select placeholder="Region Type" formControlName="regionType">
+            <md-option *ngFor="let region of regionTypeOptions" [value]="region.name">{{ region.name }}</md-option>
+        </md-select>
+        <!--<ng2-select name='regionType' [placeholder]="'Region Type'"
             [displayBy]="'name'"
             [selectedDisplayBy]="'label'"
             [identifyBy]="'name'"
@@ -27,7 +30,7 @@
             [identifyBy]="'name'"
             [options]="centerTypeOptions"
             formControlName="centerType">
-        </ng2-select>
+        </ng2-select>-->
         <md-input-container>
             <input mdInput formControlName="minDepth" placeholder="Min Depth" type="number" step="0.1">
         </md-input-container>

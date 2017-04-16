@@ -5,8 +5,8 @@
 
 #placesearch {
   position: absolute;
-  top: 75%;
-  left: 33%;
+  top: 90%;
+  left: 10%;
   z-index: 10000;
   text-align: center;
 }
@@ -17,12 +17,12 @@
   left: 5%;
   z-index: 10000;
   text-align: center;
-  width: 200px;  
+  width: 200px;
 }
 
 #dateRange {
   position: absolute;
-  top: 5%;
+  top: 10%;
   left: 60%;
   z-index: 10000;
   text-align: center;
@@ -63,8 +63,8 @@ md-autocomplete{
 
 #myLocation {
   position: absolute;
-  top: 75%;
-  left: 90%;
+  top: 90%;
+  left: 95%;
   z-index: 10000;
 }
 
