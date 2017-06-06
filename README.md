@@ -1,87 +1,28 @@
+# Usgs
 
-# install the repo with npm
-npm install
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
 
-# start the server
-npm start
+## Development server
 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-go to [http://0.0.0.0:4000](http://0.0.0.0:4000) or [http://localhost:4000](http://localhost:4000) in your browser
+## Code scaffolding
 
-# Getting Started
-## Dependencies
-What you need to run this app:
-* `node` and `npm` (`brew install node`)
-* Ensure you're running the latest versions Node `v4.x.x`+ (or `v5.x.x`) and NPM `3.x.x`+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
 
-Once you have those, you should install these globals with `npm install --global`:
-* `webpack` (`npm install --global webpack`)
-* `webpack-dev-server` (`npm install --global webpack-dev-server`)
-* `karma` (`npm install --global karma-cli`)
-* `protractor` (`npm install --global protractor`)
-* `typescript` (`npm install --global typescript`)
+## Build
 
-## Installing
-* `npm install` to install all dependencies
-* `npm run server` to start the dev server in another tab
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running the app
-After you have installed all dependencies you can now run the app. Run `npm run server` to start a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:4000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:4000/`).
+## Running unit tests
 
-### server
-```bash
-# development
-npm run server
-# production
-npm run build:prod
-npm run server:prod
-```
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Other commands
+## Running end-to-end tests
 
-### build files
-```bash
-# development
-npm run build:dev
-# production
-npm run build:prod
-```
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
 
-### watch and build files
-```bash
-npm run watch
-```
+## Further help
 
-### run tests
-```bash
-npm run test
-```
-
-### watch and run our tests
-```bash
-npm run watch:test
-```
-
-### run end-to-end tests
-```bash
-# make sure you have your server running in another terminal
-npm run e2e
-```
-
-### run webdriver (for end-to-end)
-```bash
-npm run webdriver:update
-npm run webdriver:start
-```
-
-### run Protractor's elementExplorer (for end-to-end)
-```bash
-npm run webdriver:start
-# in another terminal
-npm run e2e:live
-```
-
-### build Docker
-```bash
-npm run build:docker
-```
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

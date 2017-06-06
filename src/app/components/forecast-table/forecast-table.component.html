@@ -1,0 +1,16 @@
+<table class="rwd-table">
+    <thead>
+        <tr>
+            <th scope="col">In the Next:</th>
+            <th scope="col" *ngFor="let range of ranges">M{{ range }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-data [ngForOf]="tableData">
+            <tr>
+                <th scope="row">{{data.type}}</th>
+                <td *ngFor="let forecast of data.ranges">{{ forecast.lowerBound }} - {{ forecast.upperBound | minimumOne }}<br/>({{ forecast.probability | percentageForecast }})</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

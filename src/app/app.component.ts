@@ -1,11 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'app',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./app.scss'],
-  templateUrl: 'app.template.html'
+  selector: 'app-root',
+  styleUrls: ['./app.component.scss'],
+  templateUrl: 'app.component.html'
 })
 
 export class USGSApp {

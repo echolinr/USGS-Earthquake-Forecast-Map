@@ -1,0 +1,160 @@
+<md-toolbar id="mapToolbar">
+  <md-button-toggle-group #group="mdButtonToggleGroup">
+    <md-button-toggle md-button value="map" selected checked focused>Map</md-button-toggle>
+    <md-button-toggle md-button value="reports" [disabled]="!ForecastData">Reports</md-button-toggle>
+  </md-button-toggle-group>
+
+  <md-input-container>
+    <input type="text"   mdInput placeholder="Search for location" [mdAutocomplete]="results" (ngModelChange)="updateSearch()"
+      [(ngModel)]="autocomplete.query" [disabled]="!ForecastData">
+
+    <button md-raised-button color="primary" (click)="saveLocation()" [disabled]=savePlaceDisabled data-step="6" data-intro="Save the current location">Save Location</button>
+  </md-input-container>
+  <md-autocomplete #results="mdAutocomplete">
+    <md-option *ngFor="let item of autocompleteItems" (click)="moveMap(item)">
+      {{ item.description }}
+    </md-option>
+  </md-autocomplete>
+  <span class="example-fill-remaining-space"></span>
+  <md-slide-toggle style="margin-right: 20px;" (change)="toggleUSFault()" *ngIf="group.value != 'reports'" data-step="7" data-intro="Show fault layers.">US Fault</md-slide-toggle>
+  <md-button-toggle-group #groupPlaces="mdButtonToggleGroup">
+    <md-button-toggle md-button value="places" (click)="mapIsBlur = true;" [disabled]="!savedPlaces"  data-step="8" data-intro="View saved places." >My Places</md-button-toggle>
+    <md-button-toggle md-button value="earthquakes" [disabled]="!ForecastData" (click)="loadAvailableForecasts()" data-step="9" data-intro="Go to overview page." >Available Forecasts</md-button-toggle>
+  </md-button-toggle-group>
+  <div id="savedPlaces" [hidden]="groupPlaces.value != 'places'">
+    <md-list>
+      <h3 md-subheader>Saved Places
+        <md-icon right style="float:right;cursor:pointer;" (click)="hidePlacesList()">close</md-icon>
+      </h3>
+      <md-list-item *ngFor="let place of savedPlaces">
+        <md-icon md-list-icon (click)="createMarker(place)" style="float:right;cursor:pointer;">place</md-icon>
+        <h4 md-line>{{place.name}}</h4>
+        <p md-line>({{place.lat | number: '1.4-4'}}, {{place.lng | number: '1.4-4'}})</p>
+      </md-list-item>
+      <md-list-item *ngIf="savedPlaces?.length == 0">
+        <md-icon md-list-icon>place</md-icon>
+        <p md-line>There is not places saved.</p>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div id="loadFile" [hidden]="!loadFile">
+    <md-list>
+      <h3 md-subheader>Upload File
+        <md-icon right style="float:right;cursor:pointer;" (click)="loadFile = false;">close</md-icon>
+      </h3>
+      <md-list-item>
+        <md-icon md-list-icon>file_upload</md-icon>
+        <input type="file" (change)="fileUpload($event)" placeholder="Upload file" accept=".json">
+      </md-list-item>
+    </md-list>
+  </div>
+
+  <span class="example-fill-remaining-space"></span>
+  <button md-icon-button (click)="toggleMapAccessible()" [disabled]="!ForecastData"  data-step="10" data-intro="Show accessibility mode"><md-icon>accessible</md-icon></button>
+  <button md-icon-button href="javascript:void(0);" onclick="javascript:introJs().setOption('showStepNumbers', false).start();"   data-step="11" data-intro="Show tutorial trip."><md-icon>help</md-icon></button>
+  <button md-icon-button [mdMenuTriggerFor]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+  <md-menu #menu="mdMenu" data-step="12" data-intro="Download or upload data file.">
+    <button md-menu-item (click)="dataDownloader()" [disabled]="!ForecastData">
+      <md-icon>file_download</md-icon>
+      <span>Save</span>
+    </button>
+    <button md-menu-item (click)="loadFile = true;">
+      <md-icon>file_upload</md-icon>
+      <span>Upload</span>
+    </button>
+  </md-menu>
+</md-toolbar>
+<md-spinner *ngIf="loading" class='loading'></md-spinner>
+<div id="map" [hidden]="group.value == 'reports'" [ngClass]="{'blur-filter': mapIsBlur || loading}"  data-step="1" data-intro="Click an object to view hazard map."> 
+  <div *ngIf="ForecastData" id="dateRange" (click)="disableClick()" (mousedown)="disableMapInteraction()" (mouseup)="enableMapInteraction()"
+    (mouseleave)="enableMapInteraction()">
+    <div id="toggle" *ngIf="group.value != 'reports'"  data-step="1" data-intro="Select model: PGA or MMI.">
+      <input type="radio" name="forcast-model" value="PGA" [checked]='true' (click)="setModelRadio('PGA')">
+      <label title="Peak Ground Acceleration (PGA) describes the strength of the maximum ground shaking at a location as a fraction of the force of gravity (g).">PGA</label>
+      <input type="radio" name="forcast-model" value="MMI" (click)="setModelRadio('MMI')">
+      <label title="Modified Mercalli Intensity (MMI) describes the strength of ground shaking felt at a location and the level of damage to buildings.">MMI</label>
+    </div>
+    <button md-mini-fab style="float: left" (click)="decPGA()"> <md-icon>remove</md-icon> </button>
+    <div *ngIf="isModelSelected('PGA')">
+      <span style="float: left; margin: 10px; font-size: 16px" *ngIf="group.value != 'reports'"  data-step="2" data-intro="Modify PGA value."> {{pga}}g </span>
+    </div>
+    <div *ngIf="isModelSelected('MMI')">
+      <span style="float: left; margin: 10px; font-size: 16px" *ngIf="group.value != 'reports'" data-step="2" data-intro="Modify MMI value."> {{pga | mmiDisplay}} </span>
+    </div>
+    <button md-mini-fab style="float: left;" (click)="incPGA()"> <md-icon>add</md-icon> </button>
+    <my-date-range-picker style="float: left; margin-left: 5px;" [options]="myDateRangePickerOptions" [selDateRange]="mySelDateRange"
+      (dateRangeChanged)="onDateRangeChanged($event)" *ngIf="group.value != 'reports'"   data-step="3" data-intro="Choose forecast date range."></my-date-range-picker>
+    <button md-mini-fab style="float: left; margin-left: 5px;" type="submit" (click)="onUpdateForcast()" *ngIf="group.value != 'reports'"  data-step="4" data-intro="Click Go to update map.">GO</button>
+  </div>
+  <div *ngIf="ForecastData && group.value != 'reports'" id="placesearch" (click)="disableClick()" (mousedown)="disableMapInteraction()" (mouseup)="enableMapInteraction()"
+    (mouseleave)="enableMapInteraction()" data-step="5" data-intro="Animate forecast map">
+    <div *ngIf="!isPlayingForcast()">
+      <button md-icon-button (click)="rewindForcastPlay()"><md-icon>fast_rewind</md-icon></button>
+      <button md-icon-button (click)="forcastPlay()"><md-icon>play_arrow</md-icon></button>
+      <button md-icon-button (click)="forwardForcastPlay()"><md-icon>fast_forward</md-icon></button>
+      <md-slider md-discrete min="{{sliderMin}}" max="{{ sliderMax}}" step="1" value="{{sliderValue}}" thumbLabel tickInterval="auto"
+        (change)="onSliderChanged($event)"></md-slider>
+      {{startDate | date:"MM/dd/yyyy"}}
+      <cite> - </cite> {{sliderDate | date:"MM/dd/yyyy"}}
+    </div>
+    <div *ngIf="isPlayingForcast()">
+      <button md-icon-button (click)="pauseForcastPlay()"><md-icon>pause</md-icon></button>
+      <button md-icon-button (click)="forcastPlay()"><md-icon>play_arrow</md-icon></button>
+      <button md-icon-button (click)="stopForcastPlay()"><md-icon>stop</md-icon></button>
+      <md-slider md-discrete min="{{sliderMin}}" max="{{ sliderMax}}" step="1" value="{{sliderValue}}" thumbLabel tickInterval="auto"
+        (change)="onSliderChanged($event)"></md-slider>
+      {{startDate | date:"MM/dd/yyyy"}}
+      <cite> - </cite> {{sliderDate | date:"MM/dd/yyyy"}}
+    </div>
+  </div>
+  <button *ngIf="ForecastData" id="myLocation" md-mini-fab (click)="disableClick();mapPanToCurrent()" (mousedown)="disableMapInteraction()"
+    (mouseup)="enableMapInteraction()" (mouseleave)="enableMapInteraction()"><md-icon>location_searching</md-icon></button>
+
+  <div *ngIf="ForecastData && !accessibleOn" id="probLegendColor" (click)="disableClick()" (mousedown)="disableMapInteraction()" (mouseup)="enableMapInteraction()" (mouseleave)="enableMapInteraction()" style="border-radius: 10px;"></div>
+  <div *ngIf="ForecastData && accessibleOn" id="probLegendGray" (click)="disableClick()" (mousedown)="disableMapInteraction()" (mouseup)="enableMapInteraction()" (mouseleave)="enableMapInteraction()" style="border-radius: 10px;"></div>
+  <div *ngIf="ForecastData && isModelSelected('PGA')" id="probLegendText" title="Probability of PGA of at least {{pga}}g during period of {{startDate | date:'MM/dd/yyyy'}} - {{endDate | date:'MM/dd/yyyy'}} in the highlighted region shown in the map." (click)="disableClick()" (mousedown)="disableMapInteraction()" (mouseup)="enableMapInteraction()" (mouseleave)="enableMapInteraction()" style="font-weight: bolder;">99% 50% 1%</div>
+  <div *ngIf="ForecastData && isModelSelected('MMI')" id="probLegendText" title="Probability of MMI of at least {{pga | mmiDisplay}}  during period of {{startDate | date:'MM/dd/yyyy'}} - {{endDate | date:'MM/dd/yyyy'}} in the highlighted region shown in the map." (click)="disableClick()" (mousedown)="disableMapInteraction()" (mouseup)="enableMapInteraction()" (mouseleave)="enableMapInteraction()" style="font-weight: bolder;">X V I</div>
+
+</div>
+
+<div id="reports" [hidden]="group.value != 'reports'" style="text-align: center;" [ngClass]="{'blur-filter': mapIsBlur || loading}">
+  <div style="width: 100%;">
+    <div style="width: 40%;display: inline-block;padding: 20px;">
+      <md-card>
+        <md-card-header style="padding-left: 18%;">
+          <md-card-title>MMI Histogram</md-card-title>
+          <md-card-subtitle>{{ selectedRegion }}</md-card-subtitle>
+          <md-card-subtitle style="font-size:small;">Date Range: {{startDate | date:"short"}} - {{endDate | date:"short"}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <mmi-histogram [data]="MMIData"></mmi-histogram>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div style="width: 40%;display: inline-block;padding: 20px;">
+      <md-card>
+        <md-card-header style="padding-left: 18%;">
+          <md-card-title>Shaking vs Probability Chart</md-card-title>
+          <md-card-subtitle>{{ selectedRegion }}</md-card-subtitle>
+          <md-card-subtitle style="font-size:small;">Date Range: {{startDate | date:"short"}} - {{endDate | date:"short"}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <shaking-probability-chart [data]="PGAData" [domain]="PGARange"></shaking-probability-chart>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+  <div style="padding: 0 129px;width: 600px;text-align: center;">
+    <md-card>
+      <md-card-header style="padding-left: 18%;">
+        <md-card-title>Forecast Table (Based on the Entire Region)</md-card-title>
+        <md-card-subtitle>Date Range: {{startDate | date:"short"}} - {{endDate | date:"short"}}</md-card-subtitle>
+      </md-card-header>
+      <md-card-content style="padding-left: 10%;">
+        <forecast-table [data]="ForecastTableData"></forecast-table>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

@@ -1,0 +1,233 @@
+
+#map {
+    height: 600px
+}
+
+.example-fill-remaining-space {
+  // This fills the remaining space, by using flexbox. 
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
+}
+
+#placesearch {
+  position: absolute;
+  top: 90%;
+  left: 10%;
+  z-index: 10000;
+  text-align: center;
+}
+
+#probLegendColor {
+  position: absolute;
+  height: 50px;
+  width: 12px;
+  top: 5%;
+  left: 5%;
+  z-index: 10000;
+  text-align: center;
+  cursor: pointer;
+  background: blue; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(top, blue,lime, red); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(top, blue,lime, red); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(top, blue,lime, red); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to top, blue,lime, red); /* Standard syntax (must be   background: linear-gradient(to bottom blue, lime, red); /* Standard syntax (must be last) */
+}
+#probLegendGray {
+  position: absolute;
+  height: 50px;
+  width: 12px;
+  top: 5%;
+  left: 5%;
+  z-index: 10000;
+  text-align: center;
+  background: blue; /* For browsers that do not support */
+  background: -webkit-linear-gradient(top, #d9d9d9,#bfbfbf, #999999,#808080, #4d4d4d); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(top, #d9d9d9,#bfbfbf, #999999,#808080, #4d4d4d); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(top, #d9d9d9,#bfbfbf, #999999,#808080, #4d4d4d); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to top, #d9d9d9,#bfbfbf, #999999,#808080, #4d4d4d); /* Standard syntax (must be   background: linear-gradient(to bottom blue, lime, red); /* Standard syntax (must be last) */
+}
+
+#probLegendText{
+  position: absolute;
+  height: 50px;
+  width: 10px;
+  top: 5%;
+  left: 7%;
+  z-index: 10000;
+  text-align: center;}
+
+#placeInfo {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 10000;
+  text-align: center;
+  width: 200px;
+}
+
+#dateRange {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  z-index: 10000;
+  text-align: center;
+  align-content: center;
+}
+
+.selection {
+  background: #cdd2d4!important;
+}
+
+#placeInfo button{
+  line-height: 25px;
+  margin-top: 10px;
+}
+
+#placeInfo md-chip {
+  border-radius: 50px;
+  padding: 5px;
+  font-weight: 900;
+}
+
+md-input-container {
+  width: 300px;
+  margin-left: 10px;
+}
+
+md-option {
+  width: 400px;
+  font-size: small;
+}
+
+md-autocomplete{
+  width: 400px;
+}
+
+#mapToolbar {
+  font-size: small;
+}
+
+#myLocation {
+  position: absolute;
+  top: 90%;
+  left: 95%;
+  z-index: 10000;
+}
+
+#preferences {
+  min-width: initial;
+  margin-left: 5px;
+}
+
+path {
+        stroke: steelblue;
+        stroke-width: 2;
+        fill: none;
+    }
+
+md-card-subtitle .mat-card-subtitle .second {
+  font-size: small!important;
+}
+
+#toggle{
+  float: left;
+  line-height: 40px;
+  font-size: 16px;
+  margin-right: 10px;
+  border-radius: 20px;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  padding-right: 10px;
+
+  label{
+    cursor: pointer; 
+    user-select:none;
+    text-align: left;
+    &+label{
+      margin-left: 10px;
+  }
+  input{
+    display: none;
+    &+span{
+      // display: inline-block; 
+      position: relative;
+      padding-left: 20px;
+      font-weight: bolder;
+
+      &:before{
+        content: '';
+        display: block; 
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        border-radius: 50%;
+        margin-right: 5px;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #ccc;
+        background: #fff;
+      }
+      &:after{
+        content: '';
+        display: block; 
+        width: 10px;
+        height: 10px;
+        background: #222;
+        position: absolute;
+        border-radius: 50%;
+        top: 4px;
+        left: 4px;
+        opacity: 0;
+        transform: scale(0,0); 
+        transition: all .2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+      }
+    }
+    &:checked+span:after{
+      opacity: 1;
+      transform: scale(0.8,0.8);
+    }
+  }
+}
+}
+#dateRange {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 50%;
+  z-index: 10000;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  float: right; 
+  margin-left: -20px;
+}
+
+#savedPlaces {
+    position: absolute;
+    top: 70px;
+    z-index: 99999;
+    background: white;
+    border-radius: 10px;
+}
+
+#loadFile {
+    position: absolute;
+    top: 70px;
+    z-index: 99999;
+    background: white;
+    border-radius: 10px;
+}
+
+.blur-filter {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.loading {
+    position: absolute;
+    z-index: 999999;
+    top: 50%;
+    left: 50%;
+}

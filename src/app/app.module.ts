@@ -1,92 +1,60 @@
-import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, Http, RequestOptions, XHRBackend, JsonpModule} from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-import { MaterialModule } from '@angular/material';
 
-import 'hammerjs';
-
-import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
 
-import { USGSApp } from './app.component';
-import { Configuration } from './app.constants';
-import { AftershockService } from '../services/aftershock.services';
-import { PDLService } from '../services/pdl.services';
-import { ResultService } from '../services/result.services';
-import { ActiveMQService } from '../services/activemq.services';
-
-
-import { MapService } from '../services/map.service';
-import { GeocodingService } from '../services/geocoding.service';
-
-import { HomePage } from '../pages/home/home';
-import { AddEventPage } from '../pages/addEvent/addEvent';
-import { PdlRegionPage } from '../pages/pdl/pdl';
-import { EventResultsPage } from '../pages/eventResults/eventResults';
-import { ResultDetailsPage } from '../pages/resultDetails/resultDetails';
-import { NoContentPage } from '../pages/noContent/noContent';
-
-import { MapPage } from '../pages/map/map';
-import { DisclaimerPage} from '../pages/disclaimer/disclaimer';
-
-
-import { TestD3Component } from '../pages/example/example';
-import { D3Service } from 'd3-ng2-service';
+import { MaterialModule } from '@angular/material';
+import 'hammerjs'; // Angular Material Compatibility
 
 import { MyDateRangePickerModule } from 'mydaterangepicker';
-import { SpatialForcastService } from "../services/spatialforcast.service";
 
+import { USGSApp } from './app.component';
 
-import { ForecastTableComponent } from '../components/forecast-table/forecast-table.component';
-import { MMIHistogramComponent } from '../components/mmi-histogram/mmi-histogram.component';
-import { ShakingProbabilityChartComponent } from '../components/shaking-probability-chart/shaking-probability-chart.component';
+import { PercentageForecastPipe } from './pipes/percentage-forecast.pipe';
+import { MmiDisplayPipe } from './pipes/mmi-display.pipe';
+import { MinimumOnePipe } from './pipes/minimum-one.pipe';
 
+import { ShakingProbabilityChartComponent } from './components/shaking-probability-chart/shaking-probability-chart.component';
+import { ForecastTableComponent } from './components/forecast-table/forecast-table.component';
+import { MMIHistogramComponent } from './components/mmi-histogram/mmi-histogram.component';
 
-const APP_PROVIDERS = [
-  Configuration,
-  AftershockService,
-  PDLService,
-  ResultService,
-  ActiveMQService,
-  MapService,
-  GeocodingService,
-  D3Service,
-  SpatialForcastService
-];
+import { D3Service } from 'd3-ng2-service';
+import { GeocodingService } from './services/geocoding.service';
+import { MapService } from './services/map.service';
+import { SpatialForecastService } from './services/spatial-forecast.service';
+
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
-  bootstrap: [ USGSApp ],
   declarations: [
     USGSApp,
-    HomePage,
-    AddEventPage,
-    PdlRegionPage,
-    EventResultsPage,
-    ResultDetailsPage,
-    NoContentPage,
-    MapPage,
-    DisclaimerPage,
-    TestD3Component,
-    MMIHistogramComponent,
+    PercentageForecastPipe,
+    MmiDisplayPipe,
+    MinimumOnePipe,
+    ShakingProbabilityChartComponent,
     ForecastTableComponent,
-    ShakingProbabilityChartComponent
+    MMIHistogramComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpModule,
     MyDateRangePickerModule,
+    MaterialModule.forRoot(),    
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    MaterialModule.forRoot(),
-    JsonpModule
   ],
   providers: [
-    ENV_PROVIDERS,
-    APP_PROVIDERS
-  ]
+    D3Service,
+    GeocodingService,
+    MapService,
+    SpatialForecastService
+  ],
+  bootstrap: [USGSApp]
 })
-export class AppModule {}
-
+export class AppModule { }
